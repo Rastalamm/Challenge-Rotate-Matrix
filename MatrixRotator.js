@@ -32,32 +32,39 @@ var botArr = [];
 var leftArr = [];
 var rightArr = [];
 
+
+  if(!layer){
+
+    if(direction === Direction.CW){
+      for (var i = 0; i < theLength; i++) {
+        for(var j = 0; j < theLength; j++){
+          tempArr.unshift(matrix[j][i]);
+        }
+        finalArr.push(tempArr);
+        tempArr = [];
+      }
+      this.matrix = finalArr;
+    }
+
+    if(direction === Direction.CCW){
+      for (var i = 0; i < theLength; i++) {
+        for(var j = 0; j < theLength; j++){
+          tempArr.push(matrix[j][i]);
+        }
+        finalArr.unshift(tempArr);
+        tempArr = [];
+      }
+      this.matrix = finalArr;
+    }
+  }else{
+
+  }
+
+
+
   // if(layer < 1 || layer > radius){
   //   throw new RangeError("there are only 3 layers in this onion");
   // }
-
-  if(direction === Direction.CW){
-    for (var i = 0; i < theLength; i++) {
-      for(var j = 0; j < theLength; j++){
-        tempArr.unshift(matrix[j][i]);
-      }
-      finalArr.push(tempArr);
-      tempArr = [];
-    }
-    this.matrix = finalArr;
-  }
-
-  if(direction === Direction.CCW){
-    for (var i = 0; i < theLength; i++) {
-      for(var j = 0; j < theLength; j++){
-        tempArr.push(matrix[j][i]);
-      }
-      finalArr.unshift(tempArr);
-      tempArr = [];
-    }
-    this.matrix = finalArr;
-  }
-
 
   //get me the rows/columns into arrays
   for(var i = magicSmall; i <= magicBig; i++){
@@ -67,12 +74,23 @@ var rightArr = [];
     rightArr.push(matrix[i][magicBig])
   }
 
+//Clockwise Solution
+
   //puts them back into the matrix
   for(var j = magicSmall; j <= magicBig; j++){
     matrix[magicSmall][j] = leftArr.pop();
     matrix[magicBig][j] = rightArr.pop();
     matrix[j][magicSmall] = botArr.shift();
     matrix[j][magicBig] = topArr.shift();
+  }
+
+//Counterclockwise Solution
+  //puts them back into the matrix
+  for(var j = magicSmall; j <= magicBig; j++){
+    matrix[magicSmall][j] = leftArr.shift();
+    matrix[magicBig][j] = rightArr.shift();
+    matrix[j][magicSmall] = botArr.pop();
+    matrix[j][magicBig] = topArr.pop();
   }
 
 
