@@ -18,12 +18,23 @@ function MatrixRotator(matrix){
 
 //                                         |-- Must be Direction.CW
 //                                         v        or Direction.CCW
-MatrixRotator.prototype.rotate = function(direction) {
+MatrixRotator.prototype.rotate = function(direction,layer) {
 
-  matrix = this.matrix;
-  theLength = this.matrix.length;
-  tempArr = [];
-  finalArr = [];
+var matrix = this.matrix;
+var theLength = this.matrix.length;
+var tempArr = [];
+var finalArr = [];
+var radius = Math.ceil(theLength/2);
+var magicBig = (theLength - 1) - (radius-layer);
+var magicSmall = (radius - layer);
+var topArr = [];
+var botArr = [];
+var leftArr = [];
+var rightArr = [];
+
+  // if(layer < 1 || layer > radius){
+  //   throw new RangeError("there are only 3 layers in this onion");
+  // }
 
   if(direction === Direction.CW){
     for (var i = 0; i < theLength; i++) {
@@ -44,9 +55,32 @@ MatrixRotator.prototype.rotate = function(direction) {
       finalArr.unshift(tempArr);
       tempArr = [];
     }
-    console.log('counterclock', finalArr)
     this.matrix = finalArr;
   }
+
+
+
+
+
+  //get me the rows/columns into arrays
+  for(var i = magicSmall; i <= magicBig; i++){
+    topArr.push(matrix[magicSmall][i])
+    botArr.push(matrix[magicBig][i])
+    leftArr.push(matrix[i][magicSmall])
+    rightArr.push(matrix[i][magicBig])
+  }
+
+  //puts them back into the matrix
+  for(var j = magicSmall; j <= magicBig; j++){
+    matrix[magicSmall][j] = leftArr.pop();
+    matrix[magicBig][j] = rightArr.pop();
+    matrix[j][magicSmall] = botArr.shift();
+    matrix[j][magicBig] = topArr.shift();
+  }
+
+
+
+
 
 return this.matrix;
 
