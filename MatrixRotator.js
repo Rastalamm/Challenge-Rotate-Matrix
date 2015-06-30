@@ -59,9 +59,6 @@ var rightArr = [];
   }
 
 
-
-
-
   //get me the rows/columns into arrays
   for(var i = magicSmall; i <= magicBig; i++){
     topArr.push(matrix[magicSmall][i])
