@@ -18,23 +18,29 @@ function MatrixRotator(matrix){
 
 //                                         |-- Must be Direction.CW
 //                                         v        or Direction.CCW
-MatrixRotator.prototype.rotate = function(direction,layer) {
+MatrixRotator.prototype.rotate = function(direction, layer) {
 
 var matrix = this.matrix;
+
 var theLength = this.matrix.length;
 var tempArr = [];
 var finalArr = [];
 var radius = Math.ceil(theLength/2);
+
 var magicBig = (theLength - 1) - (radius-layer);
-var magicSmall = (radius - layer);
+var magicSmall =  (radius - layer);
+
 var topArr = [];
 var botArr = [];
 var leftArr = [];
 var rightArr = [];
 
 
-  if(!layer){
+//tests to see if there is an argument in Layer
 
+  console.log('cc or ccw', arguments[0]);
+
+  if(arguments[1] === undefined){
     if(direction === Direction.CW){
       for (var i = 0; i < theLength; i++) {
         for(var j = 0; j < theLength; j++){
@@ -56,43 +62,41 @@ var rightArr = [];
       }
       this.matrix = finalArr;
     }
+
   }else{
+      if(layer < 1 || layer > radius){
+        throw new RangeError("there are only 3 layers in this onion");
+      }
 
+      //get me the rows/columns into arrays
+      for(var i = magicSmall; i <= magicBig; i++){
+        topArr.push(matrix[magicSmall][i])
+        botArr.push(matrix[magicBig][i])
+        leftArr.push(matrix[i][magicSmall])
+        rightArr.push(matrix[i][magicBig])
+      }
+
+    //Clockwise Solution
+    if(direction === 'ClockWise'){
+      //puts them back into the matrix
+      for(var j = magicSmall; j <= magicBig; j++){
+        matrix[magicSmall][j] = leftArr.pop();
+        matrix[magicBig][j] = rightArr.pop();
+        matrix[j][magicSmall] = botArr.shift();
+        matrix[j][magicBig] = topArr.shift();
+      }
+    }else{
+    //Counterclockwise Solution
+      //puts them back into the matrix
+      for(var k = magicSmall; j <= magicBig; j++){
+        matrix[magicSmall][j] = leftArr.shift();
+        matrix[magicBig][j] = rightArr.shift();
+        matrix[j][magicSmall] = botArr.pop();
+        matrix[j][magicBig] = topArr.pop();
+      }
+      console.log('matrix results', this.matrix);
+    }
   }
-
-
-
-  // if(layer < 1 || layer > radius){
-  //   throw new RangeError("there are only 3 layers in this onion");
-  // }
-
-  //get me the rows/columns into arrays
-  for(var i = magicSmall; i <= magicBig; i++){
-    topArr.push(matrix[magicSmall][i])
-    botArr.push(matrix[magicBig][i])
-    leftArr.push(matrix[i][magicSmall])
-    rightArr.push(matrix[i][magicBig])
-  }
-
-//Clockwise Solution
-
-  //puts them back into the matrix
-  for(var j = magicSmall; j <= magicBig; j++){
-    matrix[magicSmall][j] = leftArr.pop();
-    matrix[magicBig][j] = rightArr.pop();
-    matrix[j][magicSmall] = botArr.shift();
-    matrix[j][magicBig] = topArr.shift();
-  }
-
-//Counterclockwise Solution
-  //puts them back into the matrix
-  for(var j = magicSmall; j <= magicBig; j++){
-    matrix[magicSmall][j] = leftArr.shift();
-    matrix[magicBig][j] = rightArr.shift();
-    matrix[j][magicSmall] = botArr.pop();
-    matrix[j][magicBig] = topArr.pop();
-  }
-
 
 
 
