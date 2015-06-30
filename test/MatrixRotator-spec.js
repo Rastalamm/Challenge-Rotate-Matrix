@@ -42,7 +42,7 @@ describe("The Advanced Matrix Rotator", function () {
     matrixRotator = new MatrixRotator(Matrix.matrix2);
   });
 
-  it("can rotate all layers Clockwise", function () {
+  it.skip("can rotate all layers Clockwise", function () {
     matrixRotator.rotate(Direction.CW);
     matrixRotator.matrix.should.be.deep.equal( [
                                             [31,25,19,13,7,1],
@@ -55,7 +55,7 @@ describe("The Advanced Matrix Rotator", function () {
 
   });
 
-  it("can rotate layer 1 CounterClockwise", function () {
+  it.skip("can rotate layer 1 CounterClockwise", function () {
     matrixRotator.rotate(Direction.CCW, 1);
     matrixRotator.matrix.should.be.deep.equal([
                                             [1, 2, 3, 4, 5, 6],
@@ -67,7 +67,7 @@ describe("The Advanced Matrix Rotator", function () {
                                           ]);
   });
 
-  it("can rotate layer 2 Clockwise", function () {
+  it.skip("can rotate layer 2 Clockwise", function () {
     matrixRotator.rotate(Direction.CW, 2);
     matrixRotator.matrix.should.be.deep.equal([
                                             [1 ,2 ,3 ,4 ,5 ,6 ],

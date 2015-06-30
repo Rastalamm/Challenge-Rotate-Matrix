@@ -38,7 +38,6 @@ var rightArr = [];
 
 //tests to see if there is an argument in Layer
 
-  console.log('cc or ccw', arguments[0]);
 
   if(arguments[1] === undefined){
     if(direction === Direction.CW){
@@ -67,6 +66,7 @@ var rightArr = [];
       if(layer < 1 || layer > radius){
         throw new RangeError("there are only 3 layers in this onion");
       }
+    console.log('starting', matrix);
 
       //get me the rows/columns into arrays
       for(var i = magicSmall; i <= magicBig; i++){
@@ -88,13 +88,15 @@ var rightArr = [];
     }else{
     //Counterclockwise Solution
       //puts them back into the matrix
-      for(var k = magicSmall; j <= magicBig; j++){
-        matrix[magicSmall][j] = leftArr.shift();
-        matrix[magicBig][j] = rightArr.shift();
-        matrix[j][magicSmall] = botArr.pop();
-        matrix[j][magicBig] = topArr.pop();
+
+      for(var k = magicSmall; k <= magicBig; k++){
+        matrix[magicSmall][k] = rightArr.shift();
+        matrix[magicBig][k] = leftArr.shift();
+        matrix[k][magicSmall] = topArr.pop();
+        matrix[k][magicBig] = botArr.pop();
       }
-      console.log('matrix results', this.matrix);
+      console.log('ending', matrix);
+
     }
   }
 
