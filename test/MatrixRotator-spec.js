@@ -43,8 +43,8 @@ describe("The Advanced Matrix Rotator", function () {
   });
 
   it.skip("can rotate all layers Clockwise", function () {
-    matrixRotator.rotate(Direction.CW);
-    matrixRotator.matrix.should.be.deep.equal( [
+   // matrixRotator.rotate(Direction.CW);
+    matrixRotator.rotate(Direction.CW).should.be.deep.equal( [
                                             [31,25,19,13,7,1],
                                             [32,26,20,14,8,2],
                                             [33,27,21,15,9,3],
@@ -56,8 +56,8 @@ describe("The Advanced Matrix Rotator", function () {
   });
 
   it.skip("can rotate layer 1 CounterClockwise", function () {
-    matrixRotator.rotate(Direction.CCW, 1);
-    matrixRotator.matrix.should.be.deep.equal([
+   // matrixRotator.rotate(Direction.CCW, 1);
+    matrixRotator.rotate(Direction.CCW, 1).should.be.deep.equal([
                                             [1, 2, 3, 4, 5, 6],
                                             [7, 8, 9, 10,11,12],
                                             [13,14,16,22,17,18],
@@ -68,8 +68,8 @@ describe("The Advanced Matrix Rotator", function () {
   });
 
   it.skip("can rotate layer 2 Clockwise", function () {
-    matrixRotator.rotate(Direction.CW, 2);
-    matrixRotator.matrix.should.be.deep.equal([
+   //matrixRotator.rotate(Direction.CW, 2);
+    matrixRotator.rotate(Direction.CW, 2).should.be.deep.equal([
                                             [1 ,2 ,3 ,4 ,5 ,6 ],
                                             [7 ,26,20,14,8 ,12],
                                             [13,27,15,16,9 ,18],
@@ -80,8 +80,8 @@ describe("The Advanced Matrix Rotator", function () {
   });
 
   it("can rotate layer 3 Clockwise", function () {
-    matrixRotator.rotate(Direction.CW, 3);
-    matrixRotator.matrix.should.be.deep.equal([
+   // matrixRotator.rotate(Direction.CW, 3);
+    matrixRotator.rotate(Direction.CW, 3).should.be.deep.equal([
                                             [31,25,19,13,7 ,1 ],
                                             [32,8 ,9 ,10,11,2 ],
                                             [33,14,15,16,17,3 ],
