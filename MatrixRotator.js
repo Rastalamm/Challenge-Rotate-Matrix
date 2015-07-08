@@ -106,3 +106,11 @@ var rightArr = [];
 return this.matrix;
 
 };
+
+//                    Must be Direction.CW               |-- Must be a valid Number
+//                        or Direction.CCW ---v          v   between 1 and [radius]
+MatrixRotator.prototype.rotateStep = function(direction, layer) {
+  // do work here
+
+
+};
