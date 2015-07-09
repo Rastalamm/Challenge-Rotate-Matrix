@@ -103,11 +103,7 @@ var rightArr = [];
     }
   }
 
-
-
-
 return this.matrix;
-
 };
 
 //                    Must be Direction.CW               |-- Must be a valid Number
@@ -115,26 +111,25 @@ return this.matrix;
 MatrixRotator.prototype.rotateStep = function(direction, layer) {
   // do work here
 
-var matrix = this.matrix;
+  var matrix = this.matrix;
 
-var theLength = this.matrix.length;
-var radius = Math.ceil(theLength/2);
+  var theLength = this.matrix.length;
+  var radius = Math.ceil(theLength/2);
 
-var magicBig = (theLength - 1) - (radius-layer);
-var magicSmall =  (radius - layer);
-var magicCounter = theLength - magicBig;
+  var magicBig = (theLength - 1) - (radius-layer);
+  var magicSmall =  (radius - layer);
+  var magicCounter = theLength - magicBig;
 
-var topArr = [];
-var botArr = [];
-var leftArr = [];
-var rightArr = [];
+  var topArr = [];
+  var botArr = [];
+  var leftArr = [];
+  var rightArr = [];
 
   if(layer < 1 || layer > radius){
       throw new RangeError("there are only 3 layers in this onion");
     }
 
-    console.log(arguments[0]);
-  if(arguments[0] !== 'ClockWise' || arguments[0] !== 'CounterClockWise' ){
+  if(arguments[0] === 'ClockWise' || arguments[0] === 'CounterClockWise' ){
     //console.log('starting', matrix);
 
       //get me the rows/columns into arrays
@@ -172,7 +167,7 @@ var rightArr = [];
 
     }
   }else{
-    console.log('not a command');
+    throw new RangeError("ClockWise or CounterClockWise homie");
   }
 
 
